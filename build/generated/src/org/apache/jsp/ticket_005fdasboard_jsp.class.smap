@@ -1,0 +1,42 @@
+SMAP
+ticket_005fdasboard_jsp.java
+JSP
+*S JSP
+*F
++ 0 ticket_dasboard.jsp
+ticket_dasboard.jsp
++ 1 sidebaradmin.html
+components/sidebaradmin.html
++ 2 headeradmin.html
+components/headeradmin.html
+*L
+1,44:54
+1#1,109:98
+46#0,5:206
+1#2,201:211
+50#0,55:411
+105,3:467
+107,45:470
+152:515,3
+153,4:518
+157:522,3
+158,4:525
+162:529,3
+163,4:532
+167:536,3
+168,4:539
+172:543,3
+173,4:546
+177:550,3
+178,4:553
+182:557,3
+183,3:560
+186:563,3
+186,2:566
+187,20:568
+206,4:588
+209,3:592
+212:595,5
+213,2:600,3
+215,10:606
+*E
