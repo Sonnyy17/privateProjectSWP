@@ -7,10 +7,10 @@
 ## 0. Introduction
 
 - Team members:
-  - Trần Minh Quân
-  - Trần Quốc Bảo
-  - Nguyễn Minh Tuấn
-  - Đinh Gia Huy
+  - Nguyễn Hùng Sơn
+  - Vũ Lê Minh
+  - Nguyễn Đình Tiến Dũng
+  - Phạm Minh Triều
 - Technologies in use:
   - Tailwind CSS
   - JavaScript
