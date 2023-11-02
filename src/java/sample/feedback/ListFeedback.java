@@ -33,6 +33,7 @@ public class ListFeedback extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String status = request.getParameter("status");
         String indexPage = request.getParameter("index");
         if (indexPage == null){
             indexPage ="1";
@@ -41,13 +42,13 @@ public class ListFeedback extends HttpServlet {
         
         // get total list
         FeedbackDAO dao = new FeedbackDAO();
-        int count = dao.getNumberPage();
+        int count = dao.getNumberPage(status);
         int endPage = count/5;
         if (count % 5 != 0 ){
             endPage++;
         }
         
-        List<FeedbackDTO> list = dao.getPaging(index);
+        List<FeedbackDTO> list = dao.getPaging(index,status);
         
         request.setAttribute("ListA", list);
         request.setAttribute("endP", endPage);

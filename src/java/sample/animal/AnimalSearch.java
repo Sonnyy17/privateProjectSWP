@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sample.user.UserDTO;
 
 /**
  *
@@ -35,11 +36,12 @@ public class AnimalSearch extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         AnimalDAO d = new AnimalDAO();
         String aniamlid = request.getParameter("animalID");
+        UserDTO loginUser = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
         List<AnimalDTO> list;
         if(aniamlid != null && !aniamlid.isEmpty()){
-            list = d.searchanimal(aniamlid);
+            list = d.searchanimal(aniamlid,loginUser.getEmployee_id());
         }else{
-            list = d.getAllAimal();
+            list = d.getAllAimal(loginUser.getEmployee_id());
         }
         request.setAttribute("animals", list);
         request.getRequestDispatcher("animal.jsp").forward(request, response);
@@ -56,16 +58,7 @@ public class AnimalSearch extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AnimalDAO d = new AnimalDAO();
-        String aniamlid = request.getParameter("animalID");
-        List<AnimalDTO> list;
-        if(aniamlid != null && !aniamlid.isEmpty()){
-            list = d.searchanimal(aniamlid);
-        }else{
-            list = d.getAllAimal();
-        }
-        request.setAttribute("animals", list);
-        request.getRequestDispatcher("animal.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

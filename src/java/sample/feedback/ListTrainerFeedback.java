@@ -35,38 +35,38 @@ public class ListTrainerFeedback extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        HttpSession session = request.getSession();
+        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
 //        HttpSession session = request.getSession();
 //        UserDTO loginUser= (UserDTO) session.getAttribute("LOGIN_USER");
 //        String emp_ID= loginUser.getEmployee_id();
 //        FeedbackDAO a = new FeedbackDAO();
 //        List<FeedbackDTO> list = a.getListFeedBack(emp_ID);
 //        
+        String search = request.getParameter("search");
+        String status = request.getParameter("status");
         String indexPage = request.getParameter("index");
-        if (indexPage == null){
-            indexPage ="1";
+        if (indexPage == null) {
+            indexPage = "1";
         }
         int index = Integer.parseInt(indexPage);
-        
+
         // get total list
         FeedbackDAO dao = new FeedbackDAO();
-        int count = dao.getNumberPage();
-        int endPage = count/5;
-        if (count % 5 != 0 ){
+        int count = dao.getNumberPage(loginUser.getEmployee_id(), search, status);
+        int endPage = count / 5;
+        if (count % 5 != 0) {
             endPage++;
         }
-         HttpSession session = request.getSession();
-        UserDTO loginUser= (UserDTO) session.getAttribute("LOGIN_USER");
         
-        List<FeedbackDTO> list = dao.getPagingTrainer(index,loginUser.getEmployee_id());
-        
-        
+
+        List<FeedbackDTO> list = dao.getPagingTrainer(index, loginUser.getEmployee_id(), search, status);
+
         request.setAttribute("ListA", list);
         request.setAttribute("endP", endPage);
         request.getRequestDispatcher("trainerfeedback.jsp").forward(request, response);
     }
-        
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

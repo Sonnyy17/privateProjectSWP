@@ -238,33 +238,15 @@
                            after:hover:scale-x-100 after:transition after:duration-300 after:origin-center py-2 pl-3 pr-4 text-green-600 uppercase font-bold  bg-blue-700 rounded 
                            md:bg-transparent md:p-0 text-green"aria-current="page">About us</a>
                     </li>
-                    <li>
-                        <a href="#" class="relative  w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-green-600 after:w-full after:scale-x-0 
-                           after:hover:scale-x-100 after:transition after:duration-300 after:origin-center py-2 pl-3 pr-4 text-green-600 uppercase font-bold  bg-blue-700 rounded 
-                           md:bg-transparent md:p-0 text-green"aria-current="page">Experience</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="ml-52 items-center justify-between hidden w-full md:flex md:w-auto md:order-1 " id="navbar-user">   
-                <ul class=" ml-96 flex flex-col font-medium p-4 md:p-0 mt-4 mr-6 border border-gray-100 bg-gray-50 md:flex-row  md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
-                    <li>
-                        <a href="animal.jsp" class="relative  w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-green-600 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center py-2 pl-3 pr-4 text-green-600 uppercase font-bold  bg-blue-700 rounded md:bg-transparent md:p-0 text-green"aria-current="page">Animals</a>
-                    </li>
-                    <li>
-                        <a href="news.jsp" class="relative  w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-green-600 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center py-2 pl-3 pr-4 text-green-600 uppercase font-bold  bg-blue-700 rounded md:bg-transparent md:p-0 text-green"aria-current="page">News</a>
-                    </li>
-                    <li>
-                        <a href="Map.html" class="relative  w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-green-600 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center py-2 pl-3 pr-4 text-green-600 uppercase font-bold  bg-blue-700 rounded md:bg-transparent md:p-0 text-green"aria-current="page">Map</a>
-                    </li>
                 </ul>
             </div>
             <!-- buy ticket button -->
             <!-- component -->
-            <div class="animate-bounce relative items-center md:order-2">
+            <div class="animate-bounce relative items-center md:order-2" style="margin-left: 44%">
                 <button
                     class="bg-gradient-to-b w-max mx-auto text-blue-500 font-semibold from-slate-50 to-blue-100 px-5 py-1 rounded-2xl shadow-blue-400 shadow-md border-b-4 hover border-b border-blue-200 hover:shadow-sm transition-all duration-500">
-                    <a href="/shop">Buy Ticket !</a></button>
+                    <a href="/shop">Buy Ticket !</a>
+                </button>
             </div>
         </div>        
     </nav>

@@ -23,12 +23,13 @@ public class AnimalDAO {
     PreparedStatement ptm = null;
     ResultSet rs = null;
 
-    public List<AnimalDTO> getAllAimal() {
+    public List<AnimalDTO> getAllAimal(String id) {
         List<AnimalDTO> list = new ArrayList<>();
-        String sql = "select * from Animal";
+        String sql = "select * from Animal where AnimalCage_ID in (select AnimalCage_ID from AnimalCage where Employee_ID = ?)";
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(sql);
+            ptm.setString(1,id);
             rs = ptm.executeQuery();
             while (rs.next()) {
                 AnimalDTO a = new AnimalDTO(rs.getString("Animal_ID"), rs.getString("Name"), rs.getString("DayIn"), rs.getString("Photo"), rs.getString("AnimalCage_ID"));
@@ -54,14 +55,15 @@ public class AnimalDAO {
         return null;
     }
 
-    public List<AnimalDTO> searchanimal(String animalid) {
-        String sql = "  select * from Animal where Animal_ID like ?  or AnimalCage_ID like ?";
+    public List<AnimalDTO> searchanimal(String animalid,String id) {
+        String sql = "select * from Animal where AnimalCage_ID in (select AnimalCage_ID from AnimalCage where Employee_ID = ?) and (Animal_ID like ?  or AnimalCage_ID like ?)";
         List<AnimalDTO> list = new ArrayList<>();
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(sql);
-            ptm.setString(1, "%" + animalid + "%");
+            ptm.setString(1,id);
             ptm.setString(2, "%" + animalid + "%");
+            ptm.setString(3, "%" + animalid + "%");
 
             rs = ptm.executeQuery();
             while (rs.next()) {
@@ -172,18 +174,37 @@ public class AnimalDAO {
                 number++;
                 newIdOrder = prefix + String.format("%03d", number);
             }
+            else {
+                newIdOrder = "ANM001";
+            }
         } catch (Exception e) {
         }
         return newIdOrder;
     }
 
+    public List<AnimalCageDTO> getAllAnimalCage(String id) {
+        String sql = "select * from [AnimalCage] where Employee_ID = ?";
+        List<AnimalCageDTO> list = new ArrayList<>();
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, id);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                list.add(new AnimalCageDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5)));
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+    }
+    
     public List<AnimalCageDTO> getAllAnimalCage() {
         String sql = "select * from [AnimalCage]";
         List<AnimalCageDTO> list = new ArrayList<>();
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(sql);
-
             rs = ptm.executeQuery();
             while (rs.next()) {
                 list.add(new AnimalCageDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5)));

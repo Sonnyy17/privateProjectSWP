@@ -23,17 +23,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import sample.animalcage.AnimalCageDTO;
 import sample.animalcage.AnimalCageDTO;
+import sample.user.UserDTO;
 
 /**
  *
- *  
+ *
  */
 @WebServlet(name = "CreateAnimal", urlPatterns = {"/createanimal"})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 10, // 10MB
         maxRequestSize = 1024 * 1024 * 50)
 public class CreateAnimal extends HttpServlet {
-
 
     private String extractFileName(Part part) {//This method will print the file name.
         String contentDisp = part.getHeader("content-disposition");
@@ -45,7 +45,6 @@ public class CreateAnimal extends HttpServlet {
         }
         return "";
     }
-
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -89,11 +88,10 @@ public class CreateAnimal extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AnimalDAO d = new AnimalDAO();
-
-        List<AnimalCageDTO> list = d.getAllAnimalCage();
+        UserDTO loginUser = (UserDTO) request.getSession().getAttribute("LOGIN_USER");
+        List<AnimalCageDTO> list = d.getAllAnimalCage(loginUser.getEmployee_id());
         request.setAttribute("cage", list);
-      
-       
+
         request.getRequestDispatcher("create_animal.jsp").forward(request, response);
     }
 
@@ -138,13 +136,12 @@ public class CreateAnimal extends HttpServlet {
                     return; // Stop processing if directory creation fails
                 }
             }
-            
 
             // Write the file to the specified location
             photo.write(savePath);
-         
+
         }
-        
+
         String animalcageid = request.getParameter("animalcageid");
         AnimalDAO d = new AnimalDAO();
         String animalid = d.getNewIdAnimalID();

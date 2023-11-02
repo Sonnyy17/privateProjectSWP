@@ -18,22 +18,22 @@
             <br>
             purpose
             <textarea name="purpose"> </textarea>
-            
+
             <br>
             <input type="hidden" name="date">
-            
+
             <br>
-          
-            <input type="hidden" name="processnote"/>
-            
+            Process Note
+            <textarea name="processnote"> </textarea>
+
             <br>
-            <% UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER"); %>
+            <% UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");%>
             employeeid : <%=loginUser.getEmployee_id()%> 
-            
-            
+
+
             <input type="hidden" name="employeeid" value="<%=loginUser.getEmployee_id()%>"/>
-            
-          
+
+
 
 
             <input type="submit" value="Submit"/>
@@ -41,4 +41,3 @@
         </form>
     </body>
 </html>
-    

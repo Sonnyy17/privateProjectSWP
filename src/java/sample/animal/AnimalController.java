@@ -59,10 +59,10 @@ public class AnimalController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AnimalDAO d = new AnimalDAO();
-        List<AnimalDTO> list = d.getAllAimal();
-        request.setAttribute("animallist", list);
-        request.getRequestDispatcher("animal.jsp").forward(request, response);
+//        AnimalDAO d = new AnimalDAO();
+//        List<AnimalDTO> list = d.getAllAimal();
+//        request.setAttribute("animallist", list);
+//        request.getRequestDispatcher("animal.jsp").forward(request, response);
     }
 
     /**

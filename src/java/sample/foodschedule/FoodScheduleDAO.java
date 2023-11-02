@@ -23,11 +23,14 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import sample.utils.DBUtils;
 
 /**
  *
- *  
+ *
  */
 public class FoodScheduleDAO {
 
@@ -37,13 +40,13 @@ public class FoodScheduleDAO {
 
     public List<FoodScheduleDTO> getAllFoodSchedule() {
         List<FoodScheduleDTO> list = new ArrayList<>();
-        String sql = "select * from FoodSchedule";
+        String sql = "select * from FoodSchedule fs join Food f on fs.Food_ID = f.Food_ID join AnimalCage ac on fs.AnimalCage_ID = ac.AnimalCage_ID";
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(sql);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                FoodScheduleDTO a = new FoodScheduleDTO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                FoodScheduleDTO a = new FoodScheduleDTO(rs.getString(1), rs.getString(2), rs.getString(9), rs.getString(7), rs.getString(5));
                 list.add(a);
             }
         } catch (Exception e) {
@@ -154,21 +157,23 @@ public class FoodScheduleDAO {
                 int number = Integer.parseInt(IdOrder.substring(2));
                 number++;
                 newIdOrder = prefix + String.format("%03d", number);
+            } else {
+                newIdOrder = "SC001";
             }
         } catch (Exception e) {
         }
         return newIdOrder;
     }
 
-  public static void ImportExcel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public static void ImportExcel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputStream inp;
         try {
             Part filePart = request.getPart("excelFile");
             InputStream fileContent = filePart.getInputStream();
 
             // Xử lý tệp Excel
-            HSSFWorkbook wb = new HSSFWorkbook(new POIFSFileSystem(fileContent));
-            HSSFSheet sheet = wb.getSheetAt(0);
+            Workbook workbook = WorkbookFactory.create(fileContent);
+            Sheet sheet = workbook.getSheetAt(0);
 
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
@@ -188,22 +193,24 @@ public class FoodScheduleDAO {
                 FoodScheduleDAO fs = new FoodScheduleDAO();
                 fs.InsertData(request, f);
             }
+            fileContent.close();
+            workbook.close();
         } catch (IOException | javax.servlet.ServletException ex) {
             // Xử lý các ngoại lệ nếu có
             request.setAttribute("message", ex.getMessage());
+        } finally {
+            
         }
         //request.getRequestDispatcher("foodschedulecontroller").forward(request, response);
     }
 
-  private static String getStringCellValue(Cell cell) {
-    DataFormatter formatter = new DataFormatter();
-    return formatter.formatCellValue(cell);
-}
+    private static String getStringCellValue(Cell cell) {
+        DataFormatter formatter = new DataFormatter();
+        return formatter.formatCellValue(cell);
+    }
 
-    
-    
-    public void InsertData(HttpServletRequest request,FoodScheduleDTO foodschedule){
-          String sql = " insert into FoodSchedule(Schedule_ID,Time,AnimalCage_ID, Food_ID,Date)\n"
+    public void InsertData(HttpServletRequest request, FoodScheduleDTO foodschedule) {
+        String sql = " insert into FoodSchedule(Schedule_ID,Time,AnimalCage_ID, Food_ID,Date)\n"
                 + " values(?,?,?,?,?)";
         try {
             conn = DBUtils.getConnection();
@@ -214,9 +221,9 @@ public class FoodScheduleDAO {
             ptm.setString(4, foodschedule.getFood_id());
             ptm.setString(5, foodschedule.getDate());
             int kt = ptm.executeUpdate();
-            if(kt!=0){
+            if (kt != 0) {
                 request.setAttribute("message", "successfull sql");
-            }else{
+            } else {
                 request.setAttribute("message", "fail sql");
             }
 

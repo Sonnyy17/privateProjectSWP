@@ -7,6 +7,7 @@ package sample.feedback;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -81,13 +82,12 @@ public class CreateFeedback extends HttpServlet {
         
         String title = request.getParameter("title");
         String purpose = request.getParameter("purpose");
-        String date = request.getParameter("date");
+        String date = new Date().toString();
         String processnote = request.getParameter("processnote");
         String employeeid = request.getParameter("employeeid");
-
-
         FeedbackDAO dao = new FeedbackDAO();
-        dao.createfeedback( title, purpose, date, processnote, employeeid);
+        String feedbackID = dao.getNewFeedBackID();
+        dao.createfeedback(feedbackID,title, purpose, date, processnote, employeeid);
         response.sendRedirect("ListTrainerFeedback");
 
     }

@@ -86,6 +86,9 @@ public class NewsDAO {
                 number++;
                 newIdOrder = prefix + String.format("%03d", number);
             }
+            else {
+                newIdOrder = "N001";
+            }
         } catch (Exception e) {
         }
         return newIdOrder;

@@ -20,11 +20,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import sample.animalcage.AnimalCageDAO;
 import sample.animalcage.AnimalCageDTO;
 import sample.food.FoodDAO;
 import sample.food.FoodDTO;
+import sample.user.UserDTO;
 
 /**
  *
@@ -76,11 +78,13 @@ public class CreateFoodSchedule extends HttpServlet {
             throws ServletException, IOException {
         FoodScheduleDAO d = new FoodScheduleDAO();
         FoodDAO f = new FoodDAO();
+        HttpSession session = request.getSession();
+        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         AnimalCageDAO a = new AnimalCageDAO();
         List<FoodScheduleDTO> list = d.getAllFoodSchedule();
         request.setAttribute("foodschedule", list);
         List<FoodDTO> listfood = f.getAllFood();
-        List<AnimalCageDTO> listanimalcage = a.getAllAnimalCage();
+        List<AnimalCageDTO> listanimalcage = a.getAllAnimalCage(loginUser.getEmployee_id());
         request.setAttribute("food", listfood);
         request.setAttribute("animalcage", listanimalcage);
         request.getRequestDispatcher("create_foodschedule.jsp").forward(request, response);

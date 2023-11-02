@@ -133,7 +133,7 @@
                                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-2xl font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                         >
                                         <c:forEach var="cage" items="${animalcage}">
-                                            <option>${cage.animalcage_id}</option>
+                                            <option value="${cage.animalcage_id}">${cage.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -155,7 +155,7 @@
                                     name="foodid"
                                     >
                                     <c:forEach var="f" items="${food}">
-                                        <option>${f.food_id}</option>
+                                        <option value="${f.food_id}">${f.foodname}</option>
                                     </c:forEach>
                                 </select>
                             </div>

@@ -40,6 +40,24 @@ public class AnimalCageDAO {
 
         return list;
     }
+    
+    public List<AnimalCageDTO> getAllAnimalCage(String employeeID) {
+        List<AnimalCageDTO> list = new ArrayList<>();
+        String sql = "select * from AnimalCage where Employee_ID = ?";
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, employeeID);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                AnimalCageDTO a = new AnimalCageDTO(rs.getString("AnimalCage_ID"), rs.getString("Name"), rs.getString("Area_ID"), rs.getString("Employee_ID"),rs.getString("Photo"));
+                list.add(a);
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+    }
 
     public boolean deleteanimalcage(String animalcageid) {
         String sql = "delete from AnimalCage where AnimalCage_ID =?";
@@ -161,6 +179,9 @@ public class AnimalCageDAO {
                 int number = Integer.parseInt(IdOrder.substring(1));
                 number++;
                 newIdOrder = prefix + String.format("%03d", number);
+            }
+            else {
+                newIdOrder = "C001";
             }
         } catch (Exception e) {
         }

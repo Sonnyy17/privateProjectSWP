@@ -219,7 +219,7 @@
                     name="animalcageid"
                   >
                     <c:forEach items="${cage}" var="c">
-                      <option>${c.animalcage_id}</option>
+                        <option value="${c.animalcage_id}">${c.name}</option>
                     </c:forEach>
                   </select>
                 </div>

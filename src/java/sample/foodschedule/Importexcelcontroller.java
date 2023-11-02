@@ -23,7 +23,7 @@ import sample.utils.DBUtils;
 
 /**
  *
- *  
+ *
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 10, // 10MB
@@ -48,7 +48,7 @@ public class Importexcelcontroller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Importexcelcontroller</title>");            
+            out.println("<title>Servlet Importexcelcontroller</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Importexcelcontroller at " + request.getContextPath() + "</h1>");
@@ -83,22 +83,22 @@ public class Importexcelcontroller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            Connection conn = null;
-    
-    ResultSet rs = null;
+        Connection conn = null;
+
+        ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            FoodScheduleDAO f= new FoodScheduleDAO();
-                    f.ImportExcel(request, response);
+            FoodScheduleDAO f = new FoodScheduleDAO();
+            f.ImportExcel(request, response);
             conn.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Importexcelcontroller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Importexcelcontroller.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
         response.sendRedirect("foodschedulecontroller");
-           
+
     }
 
     /**

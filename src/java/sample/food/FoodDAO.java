@@ -16,51 +16,51 @@ import sample.utils.DBUtils;
 
 /**
  *
- *  
+ *
  */
 public class FoodDAO {
-    
+
     Connection conn = null;
     PreparedStatement ptm = null;
     ResultSet rs = null;
     //PRINT
-    
+
     // getListFood()
     public List<FoodDTO> getListFood() throws SQLException {
-    List<FoodDTO> listFood = new ArrayList<>();
-    Connection conn = null;
-    PreparedStatement ptm = null;
-    ResultSet rs = null;
-    
-    try {
-        conn = DBUtils.getConnection();
-        if (conn != null) {
-            ptm = conn.prepareStatement("SELECT Food_ID, FoodName FROM Food");
-            rs = ptm.executeQuery();
-            
-            while (rs.next()) {
-                String animal_id = rs.getString("Food_ID");
-                String name = rs.getString("FoodName");
-                
-                listFood.add(new FoodDTO(animal_id, name));
+        List<FoodDTO> listFood = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("SELECT Food_ID, FoodName FROM Food");
+                rs = ptm.executeQuery();
+
+                while (rs.next()) {
+                    String animal_id = rs.getString("Food_ID");
+                    String name = rs.getString("FoodName");
+
+                    listFood.add(new FoodDTO(animal_id, name));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
             }
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        if (rs != null) {
-            rs.close();
-        }
-        if (ptm != null) {
-            ptm.close();
-        }
-        if (conn != null) {
-            conn.close();
-        }
+
+        return listFood;
     }
-    
-    return listFood;
-}
 
     //DELETE
     //deletefood
@@ -79,8 +79,7 @@ public class FoodDAO {
 
         return null;
     }
-    
-    
+
     //getFoodByID
     public FoodDTO getFoodByID(String foodid) {
         String sql = "select * from Food where Food_ID =?";
@@ -99,9 +98,8 @@ public class FoodDAO {
         return null;
     }
 
-    
     //getAllFood()
-        public List<FoodDTO> getAllFood() {
+    public List<FoodDTO> getAllFood() {
         List<FoodDTO> list = new ArrayList<>();
         String sql = "select * from Food";
         try {
@@ -117,10 +115,9 @@ public class FoodDAO {
 
         return list;
     }
-        
-        
-        //searchFood()
-        public List<FoodDTO> searchfood(String foodID) {
+
+    //searchFood()
+    public List<FoodDTO> searchfood(String foodID) {
         String sql = "select * from Food where Food_ID like ?";
         List<FoodDTO> list = new ArrayList<>();
         try {
@@ -136,10 +133,9 @@ public class FoodDAO {
 
         return list;
     }
-     
-        
-        //getNewIdFoodID()
-        public String getNewIdFoodID() {
+
+    //getNewIdFoodID()
+    public String getNewIdFoodID() {
         String sql = "select top 1 Food_ID from Food order by [Food_ID] desc";
         String IdOrder = null;
         String newIdOrder = null;
@@ -158,12 +154,15 @@ public class FoodDAO {
                 number++;
                 newIdOrder = prefix + String.format("%03d", number);
             }
+            else {
+                newIdOrder = "D001";
+            }
         } catch (Exception e) {
         }
         return newIdOrder;
     }
-    
-            public void createfood(String food_id, String foodname) {
+
+    public void createfood(String food_id, String foodname) {
         String sql = " insert into Food(Food_ID,FoodName)\n"
                 + " values(?,?)";
         try {
@@ -176,16 +175,16 @@ public class FoodDAO {
         } catch (Exception e) {
         }
     }
-            public void updatefood(String foodid, String foodname) {
-        String sql;
-       
-        sql = "UPDATE Food SET FoodName=? WHERE Food_ID=?";
 
+    public void updatefood(String foodid, String foodname) {
+        String sql;
+
+        sql = "UPDATE Food SET FoodName=? WHERE Food_ID=?";
 
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(sql);
-           
+
             ptm.setString(1, foodname);
             ptm.setString(2, foodid);
 
