@@ -196,10 +196,12 @@ public class FoodScheduleDAO {
             fileContent.close();
             workbook.close();
         } catch (IOException | javax.servlet.ServletException ex) {
+            //fileContent.close();
+            //workbook.close();
             // Xử lý các ngoại lệ nếu có
             request.setAttribute("message", ex.getMessage());
         } finally {
-            
+
         }
         //request.getRequestDispatcher("foodschedulecontroller").forward(request, response);
     }
