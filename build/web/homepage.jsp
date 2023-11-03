@@ -255,7 +255,7 @@
     <div class="background-img1">
         <div class="slideshow-container">
             <div class="slide">
-                <img class="" src="./img/thummnail.jpeg" alt="Slide 1">
+                <img class="" src="./img/thumbnail2.jpg" alt="Slide 1">
             </div>
             <div class="slide">
                 <img src="./img/tigerfoot.JPG" alt="Slide 2">
@@ -486,7 +486,7 @@
 </div>
 
 
-<img class=" animate-bounce  w-10" src="/img/117081841_1166368890386793_6794595804250703572_n.jpg" alt="">
+<img class=" animate-bounce  w-10" src="/img/animate-bounce.jpg" alt="">
 <!--Footer-->
 <div class="bg-[url('/img/bg-footer.png')]"></div>
 

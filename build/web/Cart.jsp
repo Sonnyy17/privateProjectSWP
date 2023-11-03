@@ -361,7 +361,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 </c:forEach>
               </div>
               <!-- buy all -->
-              <div class="mt-4 mx-auto justify-center flex">
+<!--              <div class="mt-4 mx-auto justify-center flex">
                 <button
                   id="view-button"
                   class="py-2 px-4 bg-transparent text-green-600 font-semibold border border-green-600 rounded hover:bg-green-600 hover:text-white hover:border-transparent transition ease-in duration-200 transform hover:-translate-y-1 active:translate-y-0"
@@ -380,7 +380,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                     });
                   });
                 </script>
-              </div>
+              </div>-->
               <!-- end buy all -->
             </form>
           </div>

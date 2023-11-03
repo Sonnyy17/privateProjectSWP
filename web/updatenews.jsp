@@ -76,7 +76,7 @@
           <!-- back button -->
           <div class="ml-0">
             <a
-              href="animalcagecontroller"
+              href="NewsControl"
               class="group flex items-center bg-transparent text-2xl font-thin tracking-widest text-white back-button"
             >
               <svg
