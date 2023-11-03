@@ -47,7 +47,7 @@ public class View_Order_Controller extends HttpServlet {
             }
             List<OrdersDTO> listOrders = dao.getListOrders(Start_Day, End_Day);
             session.setAttribute("LIST_ORDERS", listOrders);
-            if (listOrders.size() > 0) {              
+            if (listOrders.size() > 0) {
                 url = SUCCESS;
                 for (OrdersDTO orders : listOrders) {
                     Price_Total_Tmp = orders.getTotalPrice() + Price_Total_Tmp;
@@ -58,11 +58,14 @@ public class View_Order_Controller extends HttpServlet {
             int Count_T01 = 0;
             int Count_T02 = 0;
             int Count_Ticket = 0;
-
-            List<OrderDetailDTO> listOrderDetail = dao.getListOrderDetail(Start_Day, End_Day);
+            String temp = "(";
+            for(OrdersDTO i : listOrders){
+                temp += "'" + i.getOrder_ID() + "'" + ",";
+            }
+            temp = temp.substring(0,temp.length() - 1) + ")";
+            List<OrderDetailDTO> listOrderDetail = dao.getListOrderDetail(temp);
             if (listOrderDetail.size() > 0) {
                 session.setAttribute("LIST_ORDER_DETAIL", listOrderDetail);
-
                 url = SUCCESS;
                 for (OrderDetailDTO orderDetail : listOrderDetail) {
                     if (orderDetail.getTicket_ID().equals("T01")) {

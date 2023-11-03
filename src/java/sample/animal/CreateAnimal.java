@@ -147,7 +147,7 @@ public class CreateAnimal extends HttpServlet {
         String animalid = d.getNewIdAnimalID();
         response.getWriter().write("Image saved successfully!");
         d.createanimal(animalid, name, dayin, filename, animalcageid);
-        response.sendRedirect("animalcontroller");
+        response.sendRedirect("animalsearch");
     }
 
     /**

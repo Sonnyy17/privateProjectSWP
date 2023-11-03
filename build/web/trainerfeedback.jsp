@@ -92,7 +92,7 @@
             </a>
 
             <a
-                href="/news.jsp"
+                href="foodschedulecontroller"
                 class="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800"
                 >
                 <!-- HeroIcon - Cog-6-tooth -->
@@ -231,9 +231,9 @@
                                     </svg>
                                 </span>
                                 <input name="search"
-                                    placeholder="Search"
-                                    class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
-                                    />
+                                       placeholder="Search"
+                                       class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+                                       />
                             </div>
                             <div class="flex flex-row mb-1 sm:mb-0">
                                 <div class="relative">
@@ -323,11 +323,27 @@
                                                 >
                                                 ${f.processnote}
                                             </td>
-                                            <td
-                                                class="px-6 py-4 font-bold leading-5 text-green-500 border-b border-gray-200 border-r"
-                                                >
-                                                ${f.status}
-                                            </td>
+                                            <c:if test="${f.status eq 'APPROVED'}">
+                                                <td
+                                                    class="px-6 py-4 font-bold leading-5 text-green-500 border-b border-gray-200 border-r"
+                                                    >
+                                                    ${f.status}
+                                                </td>
+                                            </c:if>
+                                            <c:if test="${f.status eq 'REJECTED'}">
+                                                <td
+                                                    class="px-6 py-4 font-bold leading-5 text-red-500 border-b border-gray-200 border-r"
+                                                    >
+                                                    ${f.status}
+                                                </td>
+                                            </c:if>
+                                            <c:if test="${f.status eq 'Processing'}">
+                                                <td
+                                                    class="px-6 py-4 font-bold leading-5 text-grey-500 border-b border-gray-200 border-r"
+                                                    >
+                                                    ${f.status}
+                                                </td>
+                                            </c:if>
                                         </tr>
                                     </tbody>
                                 </c:forEach>

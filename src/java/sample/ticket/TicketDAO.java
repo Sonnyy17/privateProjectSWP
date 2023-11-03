@@ -27,9 +27,7 @@ public class TicketDAO {
     private static final String UPDATE = "UPDATE Ticket SET  Discount=?,Price = (100 - ?) * Price_Main / 100 WHERE Ticket_ID= ?";
     private static final String SEARCH_ORDERS = "SELECT Order_ID,Email , FullName,PhoneNumber,Date,TotalPrice From Orders"
             + " WHERE [Date] >= ? AND [Date] <= ? ";
-    private static final String SEARCH_ORDER_DETAIL = "SELECT OrderDetail_ID, EntryDay ,  Ticket_ID,  Order_ID,  Promotion,Quantity"
-            + " From OrderDetail"
-            + " WHERE [EntryDay] >= ? AND [EntryDay] <= ? ";
+    private static final String SEARCH_ORDER_DETAIL = "SELECT OrderDetail_ID, EntryDay ,  Ticket_ID,  Order_ID,  Promotion,Quantity From OrderDetail WHERE Order_ID in ";
 
     public boolean updateDiscount(String ID_Ticket, String Discount) throws SQLException {
         boolean checkUpdate = false;
@@ -130,7 +128,6 @@ public class TicketDAO {
                     String Date = rs.getString("Date");
                     Double TotalPrice = Double.parseDouble(rs.getString("TotalPrice"));
                     TotalPrice_tmp = TotalPrice_tmp + TotalPrice;
-
                     listOrders.add(new OrdersDTO(Order_ID, Email, FullName, PhoneNumber, Date, TotalPrice));
                 }
 
@@ -168,6 +165,47 @@ public class TicketDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
 
+                    String OrderDetail_ID = rs.getString("OrderDetail_ID");
+                    String EntryDay = rs.getString("EntryDay");
+                    String Ticket_ID = rs.getString("Ticket_ID");
+                    String Order_ID = rs.getString("Order_ID");
+                    String Promotion = rs.getString("Promotion");
+                    int Quantity = Integer.parseInt(rs.getString("Quantity"));
+
+                    listOrderDetail.add(new OrderDetailDTO(OrderDetail_ID, EntryDay, Ticket_ID, Order_ID, Promotion, Quantity));
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return listOrderDetail;
+    }
+
+    public List<OrderDetailDTO> getListOrderDetail(String listOrderID) throws SQLException {
+        List<OrderDetailDTO> listOrderDetail = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH_ORDER_DETAIL + listOrderID);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
                     String OrderDetail_ID = rs.getString("OrderDetail_ID");
                     String EntryDay = rs.getString("EntryDay");
                     String Ticket_ID = rs.getString("Ticket_ID");
