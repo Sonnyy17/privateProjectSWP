@@ -48,12 +48,8 @@ public class EmailService {
     }
     
     public static void main(String[] args) throws UnsupportedEncodingException {
-        //System.out.println(sendEmail("comtambichatrung@gmail.com", "cc", "<html><body><h2>Trung xàm lz</h2></body></html>"));
         String orderdetailid="aaaaaa";
         int b =100;
-        System.out.println(sendEmail("kienbeo237@gmail.com", "cc", "<html><body>" + orderdetailid + " <br> "+ b +"</body></html>"));
-        //System.out.println(sendEmail("comtambichatrung@gmail.com", "cc", "<html><body>" + orderdetailid + " <br> " + b + "</body></html>"));
-
-       // EmailService.sendEmail(email, "Đặt vé thành công", "\"<html><body><%=orderdetailid%></body></html>\"");
+        System.out.println(sendEmail("nguyenhungson7272@gmail.com", "abc", "<html><body>" + orderdetailid + " <br> "+ b +"</body></html>"));
     }
 }
