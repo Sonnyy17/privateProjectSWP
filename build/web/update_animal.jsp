@@ -39,7 +39,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
           <div class="ml-0">
             <!-- Căn chỉnh vị trí sang trái -->
             <a
-              href="animalcontroller"
+              href="animalsearch"
               class="group flex items-center bg-transparent text-2xl font-thin tracking-widest text-white back-button"
             >
               <svg

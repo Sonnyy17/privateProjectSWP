@@ -120,7 +120,7 @@
         <!-- back button -->
         <div class="flex ml-0">
           <a
-            href="animalcontroller"
+            href="animalsearch"
             class="group flex items-center bg-transparent text-2xl font-thin tracking-widest text-white back-button"
           >
             <svg
