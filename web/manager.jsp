@@ -97,7 +97,7 @@
         <nav class="border-gray-200 bg-green-600">
             <div class="flex p-1">
                 <!-- logo -->
-                <a href="homepage.jsp" class="flex items-center justify-center w-1/2">
+                <a href="#" class="flex items-center justify-center w-1/2">
                     <div class="">
                         <img src="img/logo2.png" class="h-20 text-xl" alt="Logo" />
                     </div>
@@ -188,9 +188,9 @@
                                 <button class="relative overflow-hidden rounded shadow-inner px-2 py-3 font-sans uppercase ring-sky-500 transition-all after:bg-green-400 active:shadow-md active:ring-2">
                                     <p class="transition-all group-active:scale-90"><a href="/animalcagesearch?areaid=${o.area_id}">View <i class="ml-36 fas fa-chevron-right"></i> </a> </p>
                                 </button>
-                                <button class="relative overflow-hidden rounded shadow-inner px-2 py-3 font-sans uppercase ring-sky-500 transition-all after:bg-yellow-400 active:shadow-md active:ring-2">
+<!--                                <button class="relative overflow-hidden rounded shadow-inner px-2 py-3 font-sans uppercase ring-sky-500 transition-all after:bg-yellow-400 active:shadow-md active:ring-2">
                                     <p class="transition-all group-active:scale-90">Manage <i class="ml-28 fas fa-chevron-right"></i></p>
-                                </button>
+                                </button>-->
                             </div>    
                         </div>
                     </div>
